@@ -21,7 +21,8 @@ namespace battle_of_cards_cardgame {
                 // name = System.Console.ReadLine ();
                 // Names.Add (name); // odkomentować dla poprawnego działania
                 Names.Add ("Bob");
-               
+                Names.Add("James");
+
             }
         }
 
