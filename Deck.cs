@@ -6,11 +6,13 @@ namespace battle_of_cards_cardgame {
         List<Card> deck;
         public Deck (ICardDAO dao) {
             CardDAO = dao;
+            GetAllCards ();
         }
         public void GetAllCards () {
-            deck=CardDAO.GetCards ();
+            deck=CardDAO.CreateCards ();
+            
         }
-        public List<Queue<Card>> randCards (int numberOfPlayers) {
+        public List<Queue<Card>> dealCards (int numberOfPlayers) {
             List<Queue<Card>> pilesOfCards = getPilesOfCards (numberOfPlayers); // funkcja odpowiedzialna za zrobienie tylu zestawów kart" ilu jest graczy.
             for (int i = 0, j = 0; i < deck.Count; i++, j++) { // iterator j odpowiada stworzenie tylu zestawu kart ile graczy:P.
                 if (j == numberOfPlayers) {

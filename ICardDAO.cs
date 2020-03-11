@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 namespace battle_of_cards_cardgame {
     public interface ICardDAO {
-        List<Card> GetCards ();
+        List<Card> CreateCards ();
         Card GetCarByName ();
-        void Update (Card footballer);
-        void Delete (Card footballer);
+        void Update (Card car);
+        void Delete (Card car);
     }
 }
