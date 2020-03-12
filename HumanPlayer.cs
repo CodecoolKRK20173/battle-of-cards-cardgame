@@ -6,6 +6,7 @@ namespace battle_of_cards_cardgame {
         public HumanPlayer (string name, Queue<Card> cards) {
             Name = name;
             Cards = cards;
+            Hand HumanPlayerHand=new Hand(cards);
         }
 
         protected override int getChoice () {
