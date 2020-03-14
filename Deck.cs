@@ -19,14 +19,14 @@ namespace battle_of_cards_cardgame
         }
         public List<Queue<Card>> dealCards(int numberOfPlayers)
         {
-            List<Queue<Card>> pilesOfCards = getPilesOfCards(numberOfPlayers); // funkcja odpowiedzialna za zrobienie tylu zestawów kart" ilu jest graczy.
+            List<Queue<Card>> pilesOfCards = getPilesOfCards(numberOfPlayers);
             for (int i = 0, j = 0; i < deck.Count; i++, j++)
-            { // iterator j odpowiada stworzenie tylu zestawu kart ile graczy:P.
+            {
                 if (j == numberOfPlayers)
                 {
                     j = 0;
                 }
-                pilesOfCards[j].Enqueue(deck[i]); // ta metoda Enqueue służy dodawaniu elementu do naszego zestatwu)
+                pilesOfCards[j].Enqueue(deck[i]);
             }
             return pilesOfCards;
         }
@@ -47,7 +47,8 @@ namespace battle_of_cards_cardgame
             for (int i = 0; i < deck.Count; i++)
             {
                 int randomIndex = random.Next(deck.Count);
-                while(temp.Contains(deck[randomIndex])==true){
+                while (temp.Contains(deck[randomIndex]) == true)
+                {
                     randomIndex = random.Next(deck.Count);
                 }
                 temp.Add(deck[randomIndex]);
