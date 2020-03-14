@@ -9,7 +9,7 @@ namespace battle_of_cards_cardgame {
             Path = sourcePath;
         }
 
-        public List<Card> GetCards () {
+        public List<Card> CreateCards () {
             var TxtFileContent = LoadFromFile ();
             var Cards = new List<Card> ();
 
