@@ -10,13 +10,12 @@ namespace battle_of_cards_cardgame
         private Dictionary<Card, Player> whoCards; 
         private IComparer<Card> comparator;
 
-        public Table(IComparer<Card> comparator)
+        public Table()
         {
-            this.comparator = comparator;
+            // this.comparator = comparator;
             activCards = new List<Card>();
             cardsAfterDraw = new List<Card>();
             whoCards = new Dictionary<Card, Player>();
-
 
         }
 

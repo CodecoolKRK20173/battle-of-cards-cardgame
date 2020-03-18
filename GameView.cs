@@ -16,17 +16,17 @@ namespace battle_of_cards_cardgame{
 
         internal void displayInput(string v)
         {
-            throw new NotImplementedException();
+            System.Console.ReadLine();
         }
 
         internal void displayCard(Card card)
         {
-            throw new NotImplementedException();
+            System.Console.WriteLine("card");;
         }
 
         internal void displayTable(List<Card> cards)
         {
-            throw new NotImplementedException();
+            System.Console.WriteLine("tabela");;
         }
     }
 }

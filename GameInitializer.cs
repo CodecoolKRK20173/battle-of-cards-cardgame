@@ -9,6 +9,7 @@ namespace battle_of_cards_cardgame {
         public GameInitializer () {
             CreateDeck ();
             CreatePlayers ();
+            Game game = new Game(players);
         }
 
         private void CreatePlayers ()

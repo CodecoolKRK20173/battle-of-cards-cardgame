@@ -5,46 +5,47 @@ using System.Collections.Generic;
 // using GameView;
 
 
-namespace battle_of_cards_cardgame {
+namespace battle_of_cards_cardgame
+{
 
     public class Game
     {
-        private List<Player> players{get; set;}
-        private Player activPlayer{get; set;}
-        private bool isActive{get; set;}
-        private GameView gameView{get; set;}
-        private Table table {get; set;}
+        private List<Player> players { get; set; }
+        private Player activPlayer { get; set; }
+        private bool isActive { get; set; }
+        private GameView gameView { get; set; }
+        private Table table { get; set; }
 
-    
+
 
         public Game(List<Player> Players)
         {
-            compartor = new CardsComparer();
             players = Players;
             isActive = true;
-            table = new Table();
             gameView = new GameView();
+            table = new Table();
+            play();
 
         }
 
         public void play()
         {
-            
-            gameView.clearScreen();
+
+            // gameView.clearScreen(); not implemented yet
             activPlayer = players[0];
             while (isActive)
             {
-                gameView.clearScreen();
+                // gameView.clearScreen(); // not implemented yet
                 handleRound();
                 //metoda to gameVie for instance player has to press enter and then game over or sth other..
-                gameView.waitForSomeInterectionFromPlayer();
+                // gameView.waitForSomeInterectionFromPlayer() //not implemented yet
             }
-           
+
 
         }
         private int choiceFromActivePlayer()
         {
-            while(true)
+            while (true)
             {
                 //Aneta - metoda w gameView displayInput
                 gameView.displayInput("Select which attribiute You want to play:");
@@ -55,22 +56,46 @@ namespace battle_of_cards_cardgame {
 
         void handleRound()
         {
-            
+            //pobierz pierwsze karty z góry od graczy
+            List<Card> activeCards = getTopCards();
+            //wyświetl karte aktywnego gracza
+            gameView.displayCard(activeCards[0]);
+            //spytaj się gracza o atrybut
+            //wyswietl karte nieaktywnego gracza
+            //porowna karty
+            //znajdz gracz ktory wygral
+            // wysietl komunikat ktory gracz wygrał/przegrał/ remis
+            // zarzadaj kartami po roztrzygniejtej rozgrywce/ remisie
+            //zmien aktywnego gracza
+
+
         }
 
-        void showCard (Card card)
+        private List<Card> getTopCards()
+        {
+            List<Card> activeCards = new List<Card>();
+            foreach (Player player in players)
+            {
+                activeCards.Add(player.Cards.Peek());
+            }
+            return activeCards;
+        }
+
+
+
+        void showCard(Card card)
         {
             gameView.displayCard(card);
         }
 
-        void showCards (List<Card> cards)
+        void showCards(List<Card> cards)
         {
             gameView.displayTable(cards);
         }
 
         void checkIfWon()
         {
-            
+
         }
         // Player getWinner()
         // {
@@ -79,11 +104,11 @@ namespace battle_of_cards_cardgame {
 
         void getAttribiuteToCompare()
         {
-            
+
         }
 
-
     }
-
-
 }
+
+
+
