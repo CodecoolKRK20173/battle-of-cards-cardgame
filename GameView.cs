@@ -12,6 +12,10 @@ namespace battle_of_cards_cardgame{
         {
             return ("ActivePlayer:" + activePlayer.Name + "\n");
         }
+        internal string displayEndGame(Player playerWinner)
+        {
+            return ("The game win: " + playerWinner);
+        }
 
         internal void waitForSomeInterectionFromPlayer()
         {
