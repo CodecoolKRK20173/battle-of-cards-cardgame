@@ -35,7 +35,7 @@ namespace battle_of_cards_cardgame
             activePlayer = players[0];
             while (isActive)
             {
-                Console.Clear()
+                //Console.Clear();
                 handleRound();
                 changeActivePlayer();
                 //metoda to gameVie for instance player has to press enter and then game over or sth other..
@@ -60,19 +60,22 @@ namespace battle_of_cards_cardgame
             gameView.displayPlayer(activePlayer);
             //pobierz pierwsze karty z góry od graczy
             List<Card> activeCards = getTopCards();
+            table.activCards = activeCards;
             //wyświetl karte aktywnego gracza
             gameView.displayCard(activeCards[0]);
             //spytaj się gracza o atrybut
             int playerChoice = choiceFromActivePlayer();
-            Console.Clear();
+            //Console.Clear();
             //porownaj karty
-
+            CardAtributte attribute = (CardAtributte)playerChoice;
+            CardsComparer Comparator=new CardsComparer(attribute);
+            table.comparator = Comparator;
+            Player roundWinner=table.GetRoundWinner();
             
-
             //pokaz karty playerow
             showCards(activeCards);
             // zarzadaj kartami po roztrzygniejtej rozgrywce/ remisie
-            table.MoveActivCardsToAfterDraw(); //ja bym tutaj dała jako parametr activeCards;
+            table.MoveActivCardsToAfterDraw(); 
 
             isOver();
             if(isActive == false)
@@ -81,6 +84,8 @@ namespace battle_of_cards_cardgame
             }
 
         }
+
+        // metoda dodaje karte wygrana i odejmuje drugiemu
 
         private void changeActivePlayer()
         {
