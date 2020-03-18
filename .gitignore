@@ -265,3 +265,5 @@ FakesAssemblies/
 
 # Random files
 .~lock.cars.csv#
+*.DS_Store
+
