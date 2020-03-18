@@ -18,7 +18,8 @@ namespace battle_of_cards_cardgame {
     
 
         public Game(List<Player> Players)
-        {   
+        {
+            compartor = new CardsComparer();
             players = Players;
             isActive = true;
             table = new Table();
@@ -28,7 +29,7 @@ namespace battle_of_cards_cardgame {
 
         public void play()
         {
-        
+            
             gameView.clearScreen();
             activPlayer = players[0];
             while (isActive)
@@ -46,7 +47,7 @@ namespace battle_of_cards_cardgame {
             while(true)
             {
                 //Aneta - metoda w gameView displayInput
-                gameView.displayInput("Select which attribiute You want to play:")
+                gameView.displayInput("Select which attribiute You want to play:");
                 //w playerze metoda getChoice
                 return activPlayer.getChoice();
             }
@@ -71,10 +72,10 @@ namespace battle_of_cards_cardgame {
         {
             
         }
-        Player getWinner()
-        {
+        // Player getWinner()
+        // {
 
-        }
+        // }
 
         void getAttribiuteToCompare()
         {
