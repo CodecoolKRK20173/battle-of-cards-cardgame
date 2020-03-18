@@ -35,7 +35,7 @@ namespace battle_of_cards_cardgame
             activePlayer = players[0];
             while (isActive)
             {
-                // gameView.clearScreen(); // not implemented yet
+                Console.Clear()
                 handleRound();
                 changeActivePlayer();
                 //metoda to gameVie for instance player has to press enter and then game over or sth other..
@@ -63,13 +63,22 @@ namespace battle_of_cards_cardgame
             //wyświetl karte aktywnego gracza
             gameView.displayCard(activeCards[0]);
             //spytaj się gracza o atrybut
-            //wyswietl karte nieaktywnego gracza
-            //porowna karty
-            //znajdz gracz ktory wygral
-            // wysietl komunikat ktory gracz wygrał/przegrał/ remis
-            // zarzadaj kartami po roztrzygniejtej rozgrywce/ remisie
-            //zmien aktywnego gracza
+            int playerChoice = choiceFromActivePlayer();
+            Console.Clear();
+            //porownaj karty
 
+            
+
+            //pokaz karty playerow
+            showCards(activeCards);
+            // zarzadaj kartami po roztrzygniejtej rozgrywce/ remisie
+            table.MoveActivCardsToAfterDraw(); //ja bym tutaj dała jako parametr activeCards;
+
+            isOver();
+            if(isActive == false)
+            {
+                gameView.displayEndGame(getWinnerGame());
+            }
 
         }
 
@@ -105,19 +114,36 @@ namespace battle_of_cards_cardgame
         {
             gameView.displayTable(cards);
         }
-
-        void checkIfWon()
+        Player getWinnerRound()
         {
-
+            //method which return card of winner player
+            return table.GetRoundWinner();
         }
-        // Player getWinner()
-        // {
 
-        // }
-
-        void getAttribiuteToCompare()
+        Player getWinnerGame()
         {
+            Player winner=null;
+            foreach(Player player in players){
+                if(player.Cards.Count>0){
+                    winner= player;
+                }
+            }
+            return winner;
+        }
 
+        private bool isOver()
+        {
+            int playersWithoutCards = 0;
+            int numberOfPlayers = players.Count;
+            foreach(Player player in players){
+                if(player.Cards.Count==0){
+                    playersWithoutCards++;
+                }
+                if(playersWithoutCards==numberOfPlayers-1){
+                    return isActive = false;
+                }
+            }
+            return isActive = true;
         }
 
     }
