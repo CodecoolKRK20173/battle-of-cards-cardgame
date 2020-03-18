@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Player;
-using Table;
-using GameView;
+// using Player;
+// using Table;
+// using GameView;
 
 
 namespace battle_of_cards_cardgame {
@@ -11,7 +11,7 @@ namespace battle_of_cards_cardgame {
     {
         private List<Player> players{get; set;}
         private Player activPlayer{get; set;}
-        private boolean isActive{get; set;}
+        private bool isActive{get; set;}
         private GameView gameView{get; set;}
         private Table table {get; set;}
 
