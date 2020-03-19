@@ -4,27 +4,35 @@ using System.Collections.Generic;
 namespace battle_of_cards_cardgame{
     class GameView
     {
-        internal void clearScreen()
+        void clearScreen()
         {
-            throw new NotImplementedException();
+            Console.Clear();
         }
-        internal string displayPlayer(Player activePlayer)
+        string displayPlayer(Player activePlayer)
         {
             return ("ActivePlayer:" + activePlayer.Name + "\n");
         }
-        internal string displayEndGame(Player playerWinner)
+        string displayEndGame(Player playerWinner)
         {
             return ("The game win: " + playerWinner);
         }
 
-        internal void waitForSomeInterectionFromPlayer()
+        void waitForSomeInterectionFromPlayer()
         {
             throw new NotImplementedException();
         }
 
-        internal void displayInput(string v)
-        {
-            System.Console.ReadLine();
+        public void displayInput(string message)
+        {   
+            //czy ta metoda powinna pobierac input uzytkownika ?
+            Console.WriteLine(message);
+            Console.WriteLine("You can select from below attributes");
+            foreach(var a in Enum.GetNames(typeof(CardAtributte)))
+            {
+                Console.WriteLine(a);
+            }
+            //System.Console.ReadLine();
+
         }
 
         internal void displayCard(Card card)
@@ -34,7 +42,7 @@ namespace battle_of_cards_cardgame{
 
         internal void displayTable(List<Card> cards)
         {
-            System.Console.WriteLine("tabela");;
+            System.Console.WriteLine("tabela");
         }
     }
 }
