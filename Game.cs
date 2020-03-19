@@ -31,63 +31,81 @@ namespace battle_of_cards_cardgame
         public void play()
         {
 
-            // gameView.clearScreen(); not implemented yet
             activePlayer = players[0];
             while (isActive)
             {
-                //Console.Clear();
                 handleRound();
                 changeActivePlayer();
-                //metoda to gameVie for instance player has to press enter and then game over or sth other..
-                // gameView.waitForSomeInterectionFromPlayer() //not implemented yet
             }
 
 
         }
         private int choiceFromActivePlayer()
         {
-            while (true)
-            {
-                //Aneta - metoda w gameView displayInput
-                gameView.displayInput("Select which attribiute You want to play:");
-                //w playerze metoda getChoice
+            gameView.displayInput("Select which attribiute You want to play:");
+            //try
+            //{
                 return activePlayer.getChoice();
-            }
+            //}
+            //catch(System.FormatException)
+            //{
+            //    Console.WriteLine("Invalid Input. You can select only number from 1 to 4");
+            //}
+
         }
 
         void handleRound()
         {
             
             gameView.displayPlayer(activePlayer);
-            //pobierz pierwsze karty z góry od graczy
-            assignTopCardsToPlayers();
 
-            //wyświetl karte aktywnego gracza
+            assignTopCardsToPlayers();
+            
             gameView.displayCard(table.activCards[0]);
-            //spytaj się gracza o atrybut
+            
+            //player choice which attribiute is the strongest
             int playerChoice = choiceFromActivePlayer();
-            //Console.Clear();
-            //porownaj karty
             CardAtributte attribute = (CardAtributte)playerChoice;
+            
+            //roundGame
             CardsComparer Comparator=new CardsComparer(attribute);
             table.comparator = Comparator;
             Player roundWinner=table.GetRoundWinner();
-            showCards(table.activCards);
-            //metoda dodajaca/odejmujca karty do kupki
-
             
-            // zarzadaj kartami po roztrzygniejtej rozgrywce/ remisie
-            table.MoveActivCardsToAfterDraw(); 
+            showCards(table.activCards);
 
+            //substract top cards from hand player
+            foreach(Player player in players)
+            {
+                player.Cards.Dequeue();
+            }
+
+            //add cards to winner if is
+            if (roundWinner != null)
+            { 
+                foreach(Card elem in table.GetRoundTrophy())
+                {
+                    roundWinner.Cards.Enqueue(elem);  
+                    
+                }
+                table.activCards.Clear();
+                table.cardsAfterDraw.Clear();
+            } 
+            //if nobody won round game them cards are adding to cardsAfterDraw
+            else
+            {
+                table.MoveActivCardsToAfterDraw();
+            }   
+            
+            //check that one player has all cards
             isOver();
             if(isActive == false)
             {
                 gameView.displayEndGame(getWinnerGame());
             }
+            table.whoCards.Clear();
 
         }
-
-        // metoda dodaje karte wygrana i odejmuje drugiemu
 
         private void changeActivePlayer()
         {
@@ -102,15 +120,12 @@ namespace battle_of_cards_cardgame
 
         private void assignTopCardsToPlayers()
         {
-            
             foreach (Player player in players)
             {
                 table.PutCard(player.Cards.Peek(),player);
             }
             
         }
-
-
 
         void showCard(Card card)
         {
