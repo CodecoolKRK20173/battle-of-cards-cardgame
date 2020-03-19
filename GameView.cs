@@ -9,11 +9,11 @@ namespace battle_of_cards_cardgame{
         {
             Console.Clear();
         }
-        string displayPlayer(Player activePlayer)
+        public string displayPlayer(Player activePlayer)
         {
             return ("ActivePlayer:" + activePlayer.Name + "\n");
         }
-        string displayEndGame(Player playerWinner)
+        public string displayEndGame(Player playerWinner)
         {
             return ("The game win: " + playerWinner);
         }
