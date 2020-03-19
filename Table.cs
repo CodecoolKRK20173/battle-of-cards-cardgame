@@ -5,10 +5,10 @@ namespace battle_of_cards_cardgame
 {
     public class Table
     {
-        private List<Card> activCards;
+        public List<Card> activCards{get;set;}
         private List<Card> cardsAfterDraw;
         private Dictionary<Card, Player> whoCards; 
-        private IComparer<Card> comparator;
+        public IComparer<Card> comparator{get;set;}
 
         public Table()
         {
@@ -16,6 +16,7 @@ namespace battle_of_cards_cardgame
             activCards = new List<Card>();
             cardsAfterDraw = new List<Card>();
             whoCards = new Dictionary<Card, Player>();
+            
 
         }
 
@@ -53,6 +54,7 @@ namespace battle_of_cards_cardgame
                 return null;
             
             Card winningCard = activCards[0];
+    
             foreach(Card card in activCards)
             {
                 if(comparator.Compare(card, winningCard) > 0)
