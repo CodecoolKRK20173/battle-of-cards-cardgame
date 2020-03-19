@@ -8,15 +8,15 @@ namespace battle_of_cards_cardgame
         private List<Card> activCards;
         private List<Card> cardsAfterDraw;
         private Dictionary<Card, Player> whoCards; 
-        private IComparer<Card> comparator;
+        public IComparer<Card> Comparator { get; set; }
+            
 
-        public Table(IComparer<Card> comparator)
+        public Table(IComparer<Card> comparer)
         {
-            this.comparator = comparator;
+            Comparator = comparer;
             activCards = new List<Card>();
             cardsAfterDraw = new List<Card>();
             whoCards = new Dictionary<Card, Player>();
-
 
         }
 
@@ -35,7 +35,7 @@ namespace battle_of_cards_cardgame
                 {
                     for(int j=i+1; j < activCards.Count; j++)
                     {
-                        if(comparator.Compare(activCards[i], activCards[j]) != 0)
+                        if(Comparator.Compare(activCards[i], activCards[j]) != 0)
                             return false;
                     }
                         
@@ -56,7 +56,7 @@ namespace battle_of_cards_cardgame
             Card winningCard = activCards[0];
             foreach(Card card in activCards)
             {
-                if(comparator.Compare(card, winningCard) > 0)
+                if(Comparator.Compare(card, winningCard) > 0)
                 {
                     winningCard = card;
                 }
@@ -81,6 +81,9 @@ namespace battle_of_cards_cardgame
                 {
                     trophy.Add(ele);
                 }
+                activCards.Clear();
+                cardsAfterDraw.Clear();
+                
             } 
             return trophy;  
 
