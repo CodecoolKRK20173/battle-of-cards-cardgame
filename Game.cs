@@ -59,6 +59,28 @@ namespace battle_of_cards_cardgame
         {
             gameView.displayPlayer(activePlayer);
             //pobierz pierwsze karty z góry od graczy
+            
+            
+            /* Propozycja:
+            int cardsOnTable = table.PutCard(player.getTopCard(), activePlayer); //Wyciagnij karte od gracza i poloz na stole
+
+            gameView.DisplayTable(table); //wyswietl zawartosc stolu
+            
+            List<Card> cardTrophy;
+            if cardsOnTable == 2 /NUMBER_OF_PLAYERS then
+            {
+                List<Card> cardTrophy = table.GetTrophy(); //Sprawdz zwyciezce i zwroc trofeum
+                if(cardTrophy != null)
+                {
+                    table.GetRoundWinner().AddCards(cardTrophy); //Trzeba stworzyc metody w Player AddCards(List<Card> cards)
+                }
+                else
+                {
+                    table.MoveActivCardsToAfterDraw();
+                }
+            }
+             */
+
             List<Card> activeCards = getTopCards();
             table.activCards = activeCards;
             //wyświetl karte aktywnego gracza
@@ -104,6 +126,7 @@ namespace battle_of_cards_cardgame
             foreach (Player player in players)
             {
                 activeCards.Add(player.Cards.Peek());
+                //table.PutCard(player.Cards.Peek(), player);
             }
             return activeCards;
         }
