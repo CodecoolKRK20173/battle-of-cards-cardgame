@@ -18,5 +18,6 @@ namespace battle_of_cards_cardgame {
             CardDetails[CardAtributte.Coolness] = coolness;
         }
 
+
     }
 }

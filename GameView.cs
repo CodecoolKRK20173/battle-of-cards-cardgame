@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace battle_of_cards_cardgame{
     class GameView
@@ -35,10 +36,20 @@ namespace battle_of_cards_cardgame{
 
         }
 
-        internal void displayCard(Card card)
+        public void displayCard(Card card) 
         {
-            System.Console.WriteLine("card");;
+            Console.WriteLine("Card");
         }
+        /*public String centeredString(String text) 
+        {
+            int widthColumn = 35;
+            int padSize = widthColumn - text.length();
+            int padStart = text.length() + padSize / 2;
+            text = String.format("%" + padStart + "s", text);
+            text = String.format("%-" + widthColumn  + "s", text);
+
+            return text;
+        }*/
 
         internal void displayTable(List<Card> cards)
         {
