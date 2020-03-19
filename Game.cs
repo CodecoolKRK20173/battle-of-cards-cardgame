@@ -57,12 +57,13 @@ namespace battle_of_cards_cardgame
 
         void handleRound()
         {
+            
             gameView.displayPlayer(activePlayer);
             //pobierz pierwsze karty z góry od graczy
-            List<Card> activeCards = getTopCards();
-            table.activCards = activeCards;
+            assignTopCardsToPlayers();
+
             //wyświetl karte aktywnego gracza
-            gameView.displayCard(activeCards[0]);
+            gameView.displayCard(table.activCards[0]);
             //spytaj się gracza o atrybut
             int playerChoice = choiceFromActivePlayer();
             //Console.Clear();
@@ -71,9 +72,10 @@ namespace battle_of_cards_cardgame
             CardsComparer Comparator=new CardsComparer(attribute);
             table.comparator = Comparator;
             Player roundWinner=table.GetRoundWinner();
+            showCards(table.activCards);
+            //metoda dodajaca/odejmujca karty do kupki
+
             
-            //pokaz karty playerow
-            showCards(activeCards);
             // zarzadaj kartami po roztrzygniejtej rozgrywce/ remisie
             table.MoveActivCardsToAfterDraw(); 
 
@@ -98,14 +100,14 @@ namespace battle_of_cards_cardgame
             }
         }
 
-        private List<Card> getTopCards()
+        private void assignTopCardsToPlayers()
         {
-            List<Card> activeCards = new List<Card>();
+            
             foreach (Player player in players)
             {
-                activeCards.Add(player.Cards.Peek());
+                table.PutCard(player.Cards.Peek(),player);
             }
-            return activeCards;
+            
         }
 
 
