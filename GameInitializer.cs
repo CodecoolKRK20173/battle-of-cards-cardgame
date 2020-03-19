@@ -40,7 +40,8 @@ namespace battle_of_cards_cardgame {
                 // System.Console.WriteLine ("Player {0}. Type your nick: ", i + 1);
                 // name = System.Console.ReadLine ();
                 // Names.Add (name); // odkomentować dla poprawnego działania
-                names.Add ("Bob");
+                if (i == 0) {names.Add ("Bob");}
+                else{names.Add ("John");}
             }
             return names;
         }
