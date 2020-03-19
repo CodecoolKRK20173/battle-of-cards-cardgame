@@ -82,8 +82,6 @@ namespace battle_of_cards_cardgame
                 {
                     trophy.Add(ele);
                 }
-                activCards.Clear();
-                cardsAfterDraw.Clear();
             } 
             return trophy;  
 
