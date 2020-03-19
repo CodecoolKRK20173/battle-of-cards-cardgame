@@ -6,8 +6,8 @@ namespace battle_of_cards_cardgame
     public class Table
     {
         public List<Card> activCards{get;set;}
-        private List<Card> cardsAfterDraw;
-        private Dictionary<Card, Player> whoCards; 
+        public List<Card> cardsAfterDraw{get;set;}
+        public Dictionary<Card, Player> whoCards{get;set;} 
         public IComparer<Card> comparator{get;set;}
 
         public Table()
@@ -48,7 +48,7 @@ namespace battle_of_cards_cardgame
             }
         }
 
-        private Card GetWinningCard()
+        public Card GetWinningCard()
         {  
             if (AllCardsEqual())
                 return null;
