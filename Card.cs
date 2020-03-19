@@ -2,21 +2,22 @@ using System.Collections.Generic;
 namespace battle_of_cards_cardgame {
     public class Card {
 
-        public int Power { get; set; }
         public string Name { get; set; }
-        public int Speed { get; set; }
-        public int Coolness { get; set; }
         public string Curiosity { get; set; }
-        bool hidden { get; set; }
-        public Card (string name, int speed, int power, int coolness, string curiosity) {
+        // public int Power { get; set; }
+        // public int Speed { get; set; }
+        // public int Coolness { get; set; }
 
-            Power = power;
+        public bool hidden { get; set; }
+        public Dictionary<CardAtributte, int> CardDetails=new Dictionary<CardAtributte, int>();
+        public Card (string name, int power, int speed, int coolness, string curiosity) {
             Name = name;
-            Speed = speed;
-            Coolness = coolness;
             Curiosity = curiosity;
-            hidden = true;
+            CardDetails[CardAtributte.Power] = power;
+            CardDetails[CardAtributte.Speed] = speed;
+            CardDetails[CardAtributte.Coolness] = coolness;
         }
+
 
     }
 }

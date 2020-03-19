@@ -9,7 +9,11 @@ namespace battle_of_cards_cardgame {
             Hand HumanPlayerHand=new Hand(cards);
         }
 
+<<<<<<< HEAD
         protected override int getChoice () {
+=======
+        public override int getChoice () {
+>>>>>>> feature/Game
             System.Console.WriteLine ("Your choice: ");
             int choice = int.Parse (System.Console.ReadLine ());
             return choice;

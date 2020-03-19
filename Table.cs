@@ -5,6 +5,7 @@ namespace battle_of_cards_cardgame
 {
     public class Table
     {
+<<<<<<< HEAD
         private List<Card> activCards;
         private List<Card> cardsAfterDraw;
         private Dictionary<Card, Player> whoCards; 
@@ -17,6 +18,20 @@ namespace battle_of_cards_cardgame
             activCards = new List<Card>();
             cardsAfterDraw = new List<Card>();
             whoCards = new Dictionary<Card, Player>();
+=======
+        public List<Card> activCards{get;set;}
+        private List<Card> cardsAfterDraw;
+        private Dictionary<Card, Player> whoCards; 
+        public IComparer<Card> comparator{get;set;}
+
+        public Table()
+        {
+            // this.comparator = comparator;
+            activCards = new List<Card>();
+            cardsAfterDraw = new List<Card>();
+            whoCards = new Dictionary<Card, Player>();
+            
+>>>>>>> feature/Game
 
         }
 
@@ -35,7 +50,11 @@ namespace battle_of_cards_cardgame
                 {
                     for(int j=i+1; j < activCards.Count; j++)
                     {
+<<<<<<< HEAD
                         if(Comparator.Compare(activCards[i], activCards[j]) != 0)
+=======
+                        if(comparator.Compare(activCards[i], activCards[j]) != 0)
+>>>>>>> feature/Game
                             return false;
                     }
                         
@@ -54,9 +73,16 @@ namespace battle_of_cards_cardgame
                 return null;
             
             Card winningCard = activCards[0];
+<<<<<<< HEAD
             foreach(Card card in activCards)
             {
                 if(Comparator.Compare(card, winningCard) > 0)
+=======
+    
+            foreach(Card card in activCards)
+            {
+                if(comparator.Compare(card, winningCard) > 0)
+>>>>>>> feature/Game
                 {
                     winningCard = card;
                 }
@@ -83,7 +109,10 @@ namespace battle_of_cards_cardgame
                 }
                 activCards.Clear();
                 cardsAfterDraw.Clear();
+<<<<<<< HEAD
                 
+=======
+>>>>>>> feature/Game
             } 
             return trophy;  
 
