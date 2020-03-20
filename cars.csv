@@ -1,24 +1,24 @@
-Ferrari 308 GTS,101,100,550,a
-Porsche 356,102,200,600,b
-Jaguar E-Type,103,300,650,c
-Chevrolet Corvette,104,400,700,d
-Lamborghini Miura,105,500,750,e
-Porsche 911,106,600,800,a
-Rolls-Royce Dawn Drophead,107,700,850,b
-Mercedes SL 300 Gullwing,108,800,900,c
-Ferrari 250 GTO,109,900,950,d
-Aston Martin DB4,110,1000,1000,e
-BMW 3.0 CSL,111,1100,1050,a
-Acura NSX,112,1200,1100,b
-Shelby GT350,113,1300,1150,c
-Ford Model T,114,1400,1200,d
-VW Beetle,115,1500,1250,e
-Volvo P1800,116,1600,1300,a
-Dodge Viper GTS,117,1700,1350,b
-DeTomaso Pantera,118,1800,1400,c
-McLaren F1,119,1900,1450,d
-Cizeta-Moroder V16T,120,2000,1500,e
-Datsun 240Z,121,2100,1550,a
-Chevrolet Camaro,122,2200,1600,b
-Fiat 124 Spider,123,2300,1650,c
-Austin-Healey 3000,124,2400,1700,d
+Ferrari 308 GTS,150,199,990,Card 1
+Porsche 356,150,202,990,Card 2
+Jaguar E-Type,160,205,990,Card 3
+Chevrolet Corvette,165,208,990,Card 4
+Lamborghini Miura,170,211,990,Card 5
+Porsche 911,175,214,990,Card 6
+Rolls-Royce Dawn Drophead,180,217,990,Card 7
+Mercedes SL 300 Gullwing,185,220,990,Card 8
+Ferrari 250 GTO,190,223,990,Card 9
+Aston Martin DB4,195,226,990,Card 10
+BMW 3.0 CSL,200,229,690,Card 11
+Acura NSX,205,232,660,Card 12
+Shelby GT350,210,235,630,Card 13
+Ford Model T,215,238,600,Card 14
+VW Beetle,220,241,570,Card 15
+Volvo P1800,225,320,540,Card 16
+Dodge Viper GTS,230,320,510,Card 17
+DeTomaso Pantera,235,320,480,Card 18
+McLaren F1,265,320,450,Card 19
+Cizeta-Moroder V16T,265,320,420,Card 20
+Datsun 240Z,265,320,390,Card 21
+Chevrolet Camaro,265,320,360,Card 22
+Fiat 124 Spider,265,320,330,Card 23
+Austin-Healey 3000,265,320,300,Card 24

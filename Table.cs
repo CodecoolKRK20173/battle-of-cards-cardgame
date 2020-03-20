@@ -10,6 +10,8 @@ namespace battle_of_cards_cardgame
         public Dictionary<Card, Player> whoCards{get;set;} 
         public IComparer<Card> comparator{get;set;}
 
+        public Player winningPlayer{ get; set; }
+
         public Table()
         {
             
@@ -52,17 +54,27 @@ namespace battle_of_cards_cardgame
         {  
             if (AllCardsEqual())
                 return null;
-            
-            Card winningCard = activCards[0];
-    
-            foreach(Card card in activCards)
-            {
-                if(comparator.Compare(card, winningCard) > 0)
-                {
-                    winningCard = card;
-                }
 
+            Card winningCard;
+            int comparationResult=comparator.Compare(activCards[0], activCards[1]);
+            if(comparationResult==1)
+            {
+                winningCard = activCards[0];
             }
+            else
+            {
+                winningCard = activCards[1];
+            }
+            
+            // Card winningCard = activCards[0];
+            // foreach(Card card in activCards)
+            // {
+            //     if(comparator.Compare(card, winningCard) > 0)
+            //     {
+            //         winningCard = card;
+            //     }
+
+            // }
             return winningCard;
         }
 
@@ -92,7 +104,8 @@ namespace battle_of_cards_cardgame
 
             try
             {
-                return whoCards[GetWinningCard()];
+                winningPlayer = whoCards[GetWinningCard()];
+                return winningPlayer;
             }
             catch(KeyNotFoundException exc)
             {

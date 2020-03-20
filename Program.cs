@@ -5,14 +5,10 @@ using System.Collections.Generic;
 namespace battle_of_cards_cardgame {
     class Program {
         static void Main (string[] args) {
-            GameInitializer gameSetup = new GameInitializer ();
+            GameSetup gameSetup = new GameSetup ();
             GameView view = new GameView();
             view.displayInput("Kot");
    
-            
-
-
-
         }    
     }
 }
