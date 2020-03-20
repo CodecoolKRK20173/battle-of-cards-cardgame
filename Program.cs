@@ -8,6 +8,11 @@ namespace battle_of_cards_cardgame {
             GameInitializer gameSetup = new GameInitializer ();
             GameView view = new GameView();
             view.displayInput("Kot");
+   
+            
+
+
+
         }    
     }
 }

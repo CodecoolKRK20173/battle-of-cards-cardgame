@@ -134,7 +134,7 @@ namespace battle_of_cards_cardgame
 
         void showCards(List<Card> cards)
         {
-            gameView.displayTable(cards);
+            //gameView.displayTable(cards);
         }
         Player getWinnerRound()
         {
