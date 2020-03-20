@@ -12,7 +12,7 @@ namespace battle_of_cards_cardgame
 
         public Table()
         {
-            // this.comparator = comparator;
+            
             activCards = new List<Card>();
             cardsAfterDraw = new List<Card>();
             whoCards = new Dictionary<Card, Player>();
