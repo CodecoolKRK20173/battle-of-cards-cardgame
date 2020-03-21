@@ -16,7 +16,7 @@ namespace battle_of_cards_cardgame
         {
             View.DisplayMessage("\n      Your choice: ");
             int choice = 0;
-            var validAnswers = new List<int>() { 1, 2, 3, 4 };
+            var validAnswers = new List<int>() { 1, 2, 3};
             while (!validAnswers.Contains(choice))
                 try
                 {
@@ -25,12 +25,12 @@ namespace battle_of_cards_cardgame
                 }
                 catch (FormatException)
                 {
-                    View.DisplayLine("Wrong input. Please enter a value '1', '2', '3', or '4'.");
+                    View.DisplayLine("Wrong input. Please enter a value '1', '2' or  '3'.");
 
                 }
                 catch (ArgumentException)
                 {
-                    View.DisplayLine("Please enter a number from range 1-4");
+                    View.DisplayLine("Please enter a number from range 1-3");
                 }
             return choice;
         }

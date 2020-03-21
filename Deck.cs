@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace battle_of_cards_cardgame
 {
@@ -10,12 +11,28 @@ namespace battle_of_cards_cardgame
         public Deck(ICardDAO dao)
         {
             cardDAO = dao;
-            GetAllCards();
+            try
+            {
+                GetAllCards();
+            }
+            catch (InvalidDataException)
+            {
+                throw;
+            }
+            
             Shuffle();
         }
         private void GetAllCards()
         {
-            deck = cardDAO.CreateCards();
+            try
+            {
+                deck = cardDAO.CreateCardsFromFile();
+            }
+            catch (InvalidDataException)
+            {
+                throw;
+            }
+            
         }
         public List<Queue<Card>> DealCards(int numberOfPlayers)
         {

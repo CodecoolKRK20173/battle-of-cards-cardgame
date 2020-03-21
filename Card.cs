@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-namespace battle_of_cards_cardgame {
-    public class Card {
-
-        
+namespace battle_of_cards_cardgame 
+{
+    public class Card 
+    {    
         public string Name { get; set; }
         public Dictionary<CardAtributte, int> CardDetails=new Dictionary<CardAtributte, int>();
         private string _curiosity;

@@ -34,5 +34,11 @@ namespace battle_of_cards_cardgame
         {
             return Console.ReadLine();
         }
+
+        public static string WaitForString(string message)
+        {
+            System.Console.WriteLine(message);
+            return Console.ReadLine();
+        }
     }
 }
