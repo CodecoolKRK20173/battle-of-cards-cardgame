@@ -10,62 +10,62 @@ namespace battle_of_cards_cardgame
 
     public class Game
     {
-        private List<Player> players { get; set; }
-        private Player activePlayer { get; set; }
-        private bool isActive { get; set; }
-        private GameView gameView { get; set; }
-        private Table table { get; set; }
+        private List<Player> _players;
+        private Player _activePlayer;
+        private bool _isActive;
+        private GameView _gameView;
+        private Table _table;
 
 
 
-        public Game(List<Player> Players)
+        public Game(List<Player> players)
         {
-            players = Players;
-            isActive = true;
-            gameView = new GameView();
-            table = new Table();
-            play();
+            _players = players;
+            _isActive = true;
+            _gameView = new GameView();
+            _table = new Table();
+            Play();
 
         }
 
-        public void play()
+        private void Play()
         {
 
-            activePlayer = players[0];
-            while (isActive)
+            _activePlayer = _players[0];
+            while (_isActive)
             {
-                handleRound();
-                changeActivePlayer();
+                HandleRound();
+                ChangeActivePlayer();
             }
 
 
         }
-        private int choiceFromActivePlayer()
+        // private int GetChoiceFromActivePlayer()
+        // {
+        //     GameView.DisplayMessage("Select which attribiute You want to play:");
+        //     return _activePlayer.GetChoice();
+        // }
+
+        void HandleRound()
         {
-            gameView.displayInput("Select which attribiute You want to play:");
-            return activePlayer.getChoice();
-        }
 
-        void handleRound()
-        {
+            _gameView.DisplayPlayer(_activePlayer);
 
-            gameView.displayPlayer(activePlayer);
+            AssignTopCardsToPlayers();
 
-            assignTopCardsToPlayers();
+            _gameView.DisplayCard(_table.ActiveCards[0],_activePlayer);
 
-            gameView.displayCard(table.activCards[0],activePlayer);
-
-            int playerChoice = activePlayer.getChoice();
+            int playerChoice = _activePlayer.GetChoice();
             CardAtributte attribute = (CardAtributte)playerChoice;
 
             //roundGame
             CardsComparer Comparator = new CardsComparer(attribute);
-            table.comparator = Comparator;
-            Player roundWinner = table.GetRoundWinner();
-            gameView.displayTable(table, attribute, activePlayer);
+            _table.Comparator = Comparator;
+            Player roundWinner = _table.GetRoundWinner();
+            _gameView.DisplayTable(_table, attribute, _activePlayer);
 
             //substract top cards from hand player
-            foreach (Player player in players)
+            foreach (Player player in _players)
             {
                 player.Cards.Dequeue();
             }
@@ -73,61 +73,61 @@ namespace battle_of_cards_cardgame
             //add cards to winner if is
             if (roundWinner != null)
             {
-                foreach (Card elem in table.GetRoundTrophy())
+                foreach (Card elem in _table.GetRoundTrophy())
                 {
                     roundWinner.Cards.Enqueue(elem);
 
                 }
-                table.activCards.Clear();
-                table.cardsAfterDraw.Clear();
+                _table.ActiveCards.Clear();
+                _table.CardsAfterDraw.Clear();
             }
             //if nobody won round game them cards are adding to cardsAfterDraw
             else
             {
-                table.MoveActivCardsToAfterDraw();
+                _table.MoveActivCardsToAfterDraw();
             }
 
             //check that one player has all cards
-            isOver();
-            if (isActive == false)
+            IsOver();
+            if (_isActive == false)
             {
-                gameView.displayEndGame(getWinnerGame());
+                _gameView.DisplayEndGame(GetWinnerGame());
             }
-            table.whoCards.Clear();
+            _table.WhoseCards.Clear();
 
         }
 
-        private void changeActivePlayer()
+        private void ChangeActivePlayer()
         {
-            if (activePlayer == players[0])
+            if (_activePlayer == _players[0])
             {
-                activePlayer = players[1];
+                _activePlayer = _players[1];
             }
             else
             {
-                activePlayer = players[0];
+                _activePlayer = _players[0];
             }
         }
 
-        private void assignTopCardsToPlayers()
+        private void AssignTopCardsToPlayers()
         {
-            foreach (Player player in players)
+            foreach (Player player in _players)
             {
-                table.PutCard(player.Cards.Peek(), player);
+                _table.PutCard(player.Cards.Peek(), player);
             }
 
         }
 
-        Player getWinnerRound()
-        {
-            //method which return card of winner player
-            return table.GetRoundWinner();
-        }
+        // Player getWinnerRound()
+        // {
+        //     //method which return card of winner player
+        //     return _table.GetRoundWinner();
+        // }
 
-        Player getWinnerGame()
+        Player GetWinnerGame()
         {
             Player winner = null;
-            foreach (Player player in players)
+            foreach (Player player in _players)
             {
                 if (player.Cards.Count > 0)
                 {
@@ -137,11 +137,11 @@ namespace battle_of_cards_cardgame
             return winner;
         }
 
-        private bool isOver()
+        private bool IsOver()
         {
             int playersWithoutCards = 0;
-            int numberOfPlayers = players.Count;
-            foreach (Player player in players)
+            int numberOfPlayers = _players.Count;
+            foreach (Player player in _players)
             {
                 if (player.Cards.Count == 0)
                 {
@@ -149,10 +149,10 @@ namespace battle_of_cards_cardgame
                 }
                 if (playersWithoutCards == numberOfPlayers - 1)
                 {
-                    return isActive = false;
+                    return _isActive = false;
                 }
             }
-            return isActive = true;
+            return _isActive = true;
         }
 
     }

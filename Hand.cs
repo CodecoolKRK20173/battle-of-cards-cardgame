@@ -2,12 +2,14 @@ using System.Collections.Generic;
 
 namespace battle_of_cards_cardgame{
     class Hand{
-        Queue<Card> Cards;
-        public Hand( Queue<Card> cards){
-            Cards = cards;
+        readonly Queue<Card> _cards;
+        public Hand(Queue<Card> cards)
+        {
+            _cards = cards;
         }
-         public Card getTopCard(){
-            return Cards.Peek();
+        public Card GetTopCard()
+        {
+            return _cards.Peek();
         }
     }
 }

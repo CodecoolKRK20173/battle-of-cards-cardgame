@@ -5,65 +5,66 @@ namespace battle_of_cards_cardgame
 {
     public class Table
     {
-        public List<Card> activCards{get;set;}
-        public List<Card> cardsAfterDraw{get;set;}
-        public Dictionary<Card, Player> whoCards{get;set;} 
-        public IComparer<Card> comparator{get;set;}
+        public List<Card> ActiveCards{get;set;}
+        public List<Card> CardsAfterDraw{get;set;}
+        public Dictionary<Card, Player> WhoseCards{get;set;} 
+        public IComparer<Card> Comparator{get;set;}
 
-        public Player winningPlayer{ get; set; }
+        public Player WinningPlayer{ get; set; }
 
         public Table()
         {
             
-            activCards = new List<Card>();
-            cardsAfterDraw = new List<Card>();
-            whoCards = new Dictionary<Card, Player>();
-            
+            ActiveCards = new List<Card>();
+            CardsAfterDraw = new List<Card>();
+            WhoseCards = new Dictionary<Card, Player>();
 
         }
 
         public int PutCard(Card card, Player player)
         {
-            whoCards.Add(card, player);
-            activCards.Add(card);
-            return activCards.Count;
+            WhoseCards.Add(card, player);
+            ActiveCards.Add(card);
+            return ActiveCards.Count;
         }
 
         private bool AllCardsEqual()
         {   
             try
             {
-                for(int i=0; i < activCards.Count - 1; i++)
+                for(int i=0; i < ActiveCards.Count - 1; i++)
                 {
-                    for(int j=i+1; j < activCards.Count; j++)
+                    for(int j=i+1; j < ActiveCards.Count; j++)
                     {
-                        if(comparator.Compare(activCards[i], activCards[j]) != 0)
+                        if(Comparator.Compare(ActiveCards[i], ActiveCards[j]) != 0)
                             return false;
                     }
                         
                 }
                 return true;
             } 
-            catch(IndexOutOfRangeException exc)
+            catch(IndexOutOfRangeException)
             {
+                View.DisplayMessage("Index out of range!");
+                View.WaitForEnter();
                 return false;
             }
         }
 
-        public Card GetWinningCard()
+        private Card GetWinningCard()
         {  
             if (AllCardsEqual())
                 return null;
 
             Card winningCard;
-            int comparationResult=comparator.Compare(activCards[0], activCards[1]);
+            int comparationResult=Comparator.Compare(ActiveCards[0], ActiveCards[1]);
             if(comparationResult==1)
             {
-                winningCard = activCards[0];
+                winningCard = ActiveCards[0];
             }
             else
             {
-                winningCard = activCards[1];
+                winningCard = ActiveCards[1];
             }
             
             // Card winningCard = activCards[0];
@@ -86,11 +87,11 @@ namespace battle_of_cards_cardgame
             
             if(winningCard != null)
             {
-                foreach(Card ele in activCards)
+                foreach(Card ele in ActiveCards)
                 {
                     trophy.Add(ele);
                 }
-                foreach(Card ele in cardsAfterDraw)
+                foreach(Card ele in CardsAfterDraw)
                 {
                     trophy.Add(ele);
                 }
@@ -104,26 +105,29 @@ namespace battle_of_cards_cardgame
 
             try
             {
-                winningPlayer = whoCards[GetWinningCard()];
-                return winningPlayer;
+                WinningPlayer = WhoseCards[GetWinningCard()];
+                return WinningPlayer;
             }
-            catch(KeyNotFoundException exc)
+            catch(KeyNotFoundException)
             {
+                View.DisplayMessage("No winner!");
+                View.WaitForEnter();
                 return null;
             }
-            catch(ArgumentNullException exc)
+            catch(ArgumentNullException)
             {
+                View.DisplayMessage("No winning card!");
                 return null;
             }
         }
 
         public void MoveActivCardsToAfterDraw()
         {
-            foreach(Card ele in activCards)
+            foreach(Card ele in ActiveCards)
             {
-                cardsAfterDraw.Add(ele);
+                CardsAfterDraw.Add(ele);
             }
-            activCards.Clear();
+            ActiveCards.Clear();
         }
 
         

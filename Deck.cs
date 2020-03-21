@@ -5,21 +5,21 @@ namespace battle_of_cards_cardgame
 {
     public class Deck
     {
-        public ICardDAO CardDAO;
+        private ICardDAO cardDAO;
         List<Card> deck;
         public Deck(ICardDAO dao)
         {
-            CardDAO = dao;
+            cardDAO = dao;
             GetAllCards();
-            shuffle();
+            Shuffle();
         }
-        public void GetAllCards()
+        private void GetAllCards()
         {
-            deck = CardDAO.CreateCards();
+            deck = cardDAO.CreateCards();
         }
-        public List<Queue<Card>> dealCards(int numberOfPlayers)
+        public List<Queue<Card>> DealCards(int numberOfPlayers)
         {
-            List<Queue<Card>> pilesOfCards = getPilesOfCards(numberOfPlayers);
+            List<Queue<Card>> pilesOfCards = GetPilesOfCards(numberOfPlayers);
             for (int i = 0, j = 0; i < deck.Count; i++, j++)
             {
                 if (j == numberOfPlayers)
@@ -31,7 +31,7 @@ namespace battle_of_cards_cardgame
             return pilesOfCards;
         }
 
-        private List<Queue<Card>> getPilesOfCards(int numberOfPlayers)
+        private List<Queue<Card>> GetPilesOfCards(int numberOfPlayers)
         {
             List<Queue<Card>> pilesOfCards = new List<Queue<Card>>();
             for (int i = 0; i < numberOfPlayers; i++)
@@ -40,7 +40,7 @@ namespace battle_of_cards_cardgame
             }
             return pilesOfCards;
         }
-        private void shuffle()
+        private void Shuffle()
         {
             Random random = new Random();
             List<Card> temp = new List<Card>();

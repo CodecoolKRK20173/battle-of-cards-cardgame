@@ -6,19 +6,20 @@ namespace battle_of_cards_cardgame
 {
     public class CardsComparer : IComparer<Card>
     {
-        public CardAtributte feature;
+        private CardAtributte Feature { get; set; }
 
         public CardsComparer(CardAtributte feature)
         {
-            this.feature = feature;
+            Feature = feature;
         }
-        int IComparer<Card>.Compare(Card first, Card second)
+
+        int IComparer<Card>.Compare(Card firstCard, Card secondCard)
         {
-            if (first.CardDetails[feature] > second.CardDetails[feature])
+            if (firstCard.CardDetails[Feature] > secondCard.CardDetails[Feature])
             {
                 return 1;
             }
-            else if (first.CardDetails[feature] < second.CardDetails[feature])
+            else if (firstCard.CardDetails[Feature] < secondCard.CardDetails[Feature])
             {
                 return -1;
             }
