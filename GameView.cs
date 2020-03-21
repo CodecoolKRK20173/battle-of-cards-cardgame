@@ -13,7 +13,7 @@ namespace battle_of_cards_cardgame
             
             int gameMode = 0;
             string input;
-            var validAnswers = new List<int>() { 1, 2 };
+            var validAnswers = new List<int>() { 2 };
 
             View.DisplayMessage(
 @"Game modes:
@@ -41,7 +41,7 @@ Your choice: "
                 }
                 catch (ArgumentException)
                 {
-                    View.DisplayLine("\nPlease enter a number from range 1-2");
+                    View.DisplayLine("\nSorry! Currently only option 2 is available... ");
                 }
             }
             return gameMode;
