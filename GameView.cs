@@ -4,62 +4,73 @@ using System.Text;
 
 namespace battle_of_cards_cardgame
 {
-    class GameView
+    class GameView : View
     {
         private static int width = 30;
-        private void clearScreen()
-        {
-            Console.Clear();
-        }
-        public int getNumbersOfPlayers()
-        {
-            Console.Clear();
-            Console.WriteLine("Game modes:\n");
-            Console.WriteLine("1. Player vs Computer");
-            Console.WriteLine("2. Player vs Player \n");
 
-            Console.Write("Your choice: ");
-            string input = System.Console.ReadLine();
-            int gameMode;
-            while (int.TryParse(input, out gameMode) == false | int.Parse(input) != 2)
+        public int GetNumbersOfPlayers()
+        {
+            
+            int gameMode = 0;
+            string input;
+            var validAnswers = new List<int>() { 1, 2 };
+
+            View.DisplayMessage(
+@"Game modes:
+1. Player vs Computer (currently not available)
+2. Player vs Player
+
+Your choice: "
+            );
+
+            while (!validAnswers.Contains(gameMode))
             {
-                Console.WriteLine("Invalid choice!. For now Player vs Player only available");
-                System.Console.Write("Please try again: ");
-                input = System.Console.ReadLine();
+                input = View.WaitForString();
+                try
+                {
+                    gameMode = Int32.Parse(input);
+                    if (!validAnswers.Contains(gameMode)) 
+                    {
+                        throw new ArgumentException();
+                    }
+                }
+                catch (FormatException)
+                {
+                    View.DisplayLine("\nWrong input. Please enter a value '1' or '2'.");
+
+                }
+                catch (ArgumentException)
+                {
+                    View.DisplayLine("\nPlease enter a number from range 1-2");
+                }
             }
             return gameMode;
-
         }
-        public List<string> getPlayersNames(int numberOfPlayers)
+        public List<string> GetPlayersNames(int numberOfPlayers)
         {
             List<string> names = new List<string>();
             for (int i = 0; i < numberOfPlayers; i++)
             {
-                System.Console.WriteLine("Player {0}. Type your nick: ", i + 1);
-                string name = System.Console.ReadLine();
+                View.DisplayLine($"\nPlayer {i + 1}. Type your nick: ");
+                string name = View.WaitForString();
                 names.Add(name); // odkomentować dla poprawnego działania
             }
             return names;
         }
-        public void displayPlayer(Player activePlayer)
+        public void DisplayPlayer(Player activePlayer)
         {
-            System.Console.WriteLine(activePlayer.Name + " turn\n");
+            View.DisplayLine($"{activePlayer.Name} turn\n");
         }
-        public string displayEndGame(Player playerWinner)
+        public string DisplayEndGame(Player playerWinner)
         {
-            return ("The game win: " + playerWinner);
-        }
-
-        public void displayInput(string message)
-        {
-            Console.WriteLine(message);
+            return ($"And the winner is... {playerWinner}!");
         }
 
-        public void displayCard(Card card, Player activePlayer)
+        public void DisplayCard(Card card, Player activePlayer)
         {
-            clearScreen();
+            ClearScreen();
             string activePlayerName = string.Format("Current player:{0}\n", activePlayer.Name);
-            Console.WriteLine(CenteredString(activePlayerName, width));
+            View.DisplayLine(CenteredString(activePlayerName, width));
 
             List<Card> tempList = new List<Card>();
             tempList.Add(card);
@@ -67,7 +78,7 @@ namespace battle_of_cards_cardgame
 
             foreach (string s in cardView)
             {
-                Console.WriteLine(CenteredString(s, width));
+                View.DisplayLine(CenteredString(s, width));
             }
         }
         static string CenteredString(string s, int width)
@@ -84,11 +95,11 @@ namespace battle_of_cards_cardgame
         }
 
 
-        public void displayTable(Table table, CardAtributte atr, Player activePlayer)
+        public void DisplayTable(Table table, CardAtributte atr, Player activePlayer)
         {
-            clearScreen();
+            ClearScreen();
             int cardWidth = 30;
-            int tableWidth = cardWidth * Math.Max(table.activCards.Count, table.cardsAfterDraw.Count);
+            int tableWidth = cardWidth * Math.Max(table.ActiveCards.Count, table.CardsAfterDraw.Count);
             string tableView = "---------- TABLE ----------";
             tableView = CenteredString(tableView, tableWidth);
             string playerTurn = string.Format("--------{0} Turn-----------", activePlayer.Name);
@@ -96,9 +107,9 @@ namespace battle_of_cards_cardgame
             string selectedAtr = "SELECTED ATRTRIBUTE: " + atr.ToString().ToUpper();
             selectedAtr = CenteredString(selectedAtr, tableWidth);
             string winningPlayer;
-            if (table.winningPlayer != null)
+            if (table.WinningPlayer != null)
             {
-                winningPlayer = string.Format("-------{0} wins---------", table.winningPlayer.Name);
+                winningPlayer = string.Format("-------{0} wins---------", table.WinningPlayer.Name);
             }
             else
             {
@@ -108,37 +119,37 @@ namespace battle_of_cards_cardgame
 
             winningPlayer = CenteredString(winningPlayer, tableWidth);
 
-            string[] activCardsView = CardsView(table.activCards, cardWidth);
-            string[] cardsAfterDrawView = CardsView(table.cardsAfterDraw, cardWidth);
+            string[] activCardsView = CardsView(table.ActiveCards, cardWidth);
+            string[] cardsAfterDrawView = CardsView(table.CardsAfterDraw, cardWidth);
 
             //printing to console
-            Console.WriteLine(tableView);
-            Console.WriteLine(playerTurn);
-            Console.WriteLine(selectedAtr);
-            Console.WriteLine(winningPlayer + "\n");
-            if (table.activCards.Count > 0)
+            View.DisplayLine(tableView);
+            View.DisplayLine(playerTurn);
+            View.DisplayLine(selectedAtr);
+            View.DisplayLine(winningPlayer + "\n");
+            if (table.ActiveCards.Count > 0)
             {
                 foreach (string e in activCardsView)
                 {
 
-                    Console.WriteLine(CenteredString(e, tableWidth));
+                    View.DisplayLine(CenteredString(e, tableWidth));
                 }
             }
 
-            Console.WriteLine();
-            if (table.cardsAfterDraw.Count > 0)
+            View.DisplayLine();
+            if (table.CardsAfterDraw.Count > 0)
             {
-                Console.WriteLine(CenteredString("CARDS FROM DRAW:\n", tableWidth));
+                View.DisplayLine(CenteredString("CARDS FROM DRAW:\n", tableWidth));
             }
 
-            if (table.cardsAfterDraw.Count > 0)
+            if (table.CardsAfterDraw.Count > 0)
             {
                 foreach (string e in cardsAfterDrawView)
                 {
-                    Console.WriteLine(CenteredString(e, tableWidth));
+                    View.DisplayLine(CenteredString(e, tableWidth));
                 }
             }
-            System.Console.ReadLine();
+            View.WaitForString();
 
 
         }
