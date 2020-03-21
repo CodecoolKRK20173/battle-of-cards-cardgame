@@ -4,34 +4,65 @@ using System.Collections.Generic;
 namespace battle_of_cards_cardgame {
     public class GameSetup {
 
-        public Deck deck { get; set; }
-        List<Player> players = new List<Player> ();
-        GameView gameView = new GameView();
-        public GameSetup () {
+        Deck _deck;
+        List<Player> _players = new List<Player> ();
+        GameView _gameView = new GameView();
+        public GameSetup () 
+        {
             CreateDeck ();
             CreatePlayers ();
-            Game game = new Game(players);
+            Game game = new Game(_players);
+        }
+
+        private void InitializePlayers()
+        {
+
+            
         }
 
         private void CreatePlayers ()
         {
-            int NumberOfPlayers = gameView.getNumbersOfPlayers();
-            List<string> names = gameView.getPlayersNames(NumberOfPlayers);
-            List<Queue<Card>> pilesOfCards = deck.dealCards(NumberOfPlayers);
-            makeInstanceOfPlayer(NumberOfPlayers, names, pilesOfCards);
-        }
+            View.ClearScreen();
+            List<string> names = new List<string>();
 
-        private void makeInstanceOfPlayer(int NumberOfPlayers, List<string> names, List<Queue<Card>> pilesOfCards)
-        {
-            for (int i = 0; i < NumberOfPlayers; i++)
+            int numberOfPlayers = _gameView.GetNumbersOfPlayers();
+            List<Queue<Card>> pilesOfCards = _deck.DealCards(numberOfPlayers);
+
+            while(names.Count == 0)
             {
-                Player humanPlayer = new HumanPlayer(names[i], pilesOfCards[i]);
-                players.Add(humanPlayer);
+                try
+                {
+                    names = _gameView.GetPlayersNames(numberOfPlayers);
+                    CreateInstancesOfHumanPlayers(numberOfPlayers, names, pilesOfCards);
+                }
+                catch (InvalidOperationException)
+                {
+                    names = new List<string>();
+                    View.DisplayMessage("Name cannot be empty!");
+                    View.WaitForEnter();
+                }
             }
         }
 
-        private void CreateDeck () {
-            deck = new Deck (new CardDAO ("cars.csv"));
+        private void CreateInstancesOfHumanPlayers(int numberOfPlayers, List<string> names, List<Queue<Card>> pilesOfCards)
+        {
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                try
+                {
+                    Player humanPlayer = new HumanPlayer(names[i], pilesOfCards[i]);
+                    _players.Add(humanPlayer);    
+                }
+                catch (ArgumentException)
+                {
+                    throw new InvalidOperationException("Name cannot be empty!");
+                }
+            }
+        }
+
+        private void CreateDeck () 
+        {
+            _deck = new Deck (new CardDAO ("cars.csv"));
         }
     }
 }
