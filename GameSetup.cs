@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace battle_of_cards_cardgame {
     public class GameSetup {
@@ -9,9 +10,17 @@ namespace battle_of_cards_cardgame {
         GameView _gameView = new GameView();
         public GameSetup () 
         {
-            CreateDeck ();
-            CreatePlayers ();
-            Game game = new Game(_players);
+            try
+            {
+                CreateDeck ();
+                CreatePlayers ();
+                Game game = new Game(_players); 
+            }
+            catch (InvalidDataException exc)
+            {
+                View.DisplayMessage(exc.Message);
+                View.WaitForEnter();
+            }
         }
 
         private void InitializePlayers()
@@ -62,7 +71,15 @@ namespace battle_of_cards_cardgame {
 
         private void CreateDeck () 
         {
-            _deck = new Deck (new CardDAO ("cars.csv"));
+            try
+            {
+                _deck = new Deck (new CardDAO ("cars.xml"));
+            }
+            catch (InvalidDataException)
+            {
+                throw;
+            }
+            
         }
     }
 }
